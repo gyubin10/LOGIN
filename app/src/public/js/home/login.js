@@ -1,24 +1,33 @@
-"use strict";
-
-const id = document.querySelector("#id"),           //#은 input id = "id" ~~~  "id"를 가져오는것
+const id = document.querySelector("#id"),
     psword = document.querySelector("#psword"),
     loginBtn = document.querySelector("button");
 
+loginBtn.addEventListener("click", login);
 
-loginBtn.addEventListener("click", login )
-
-function login(){
+function login() {
     const req = {
-        id:id.value,
+        id: id.value,
         psword: psword.value,
     };
 
-    fetch("/login ", {
-        method : "POST",
+    fetch("/login", {
+        method: "POST", // POST 요청
         headers: {
-            "content-Type": "application/json",
+            "Content-Type": "application/json",
         },
         body: JSON.stringify(req),
-    }).then((res) => res.json())
-    .then(console.log);
+    })
+    .then((res) => {
+        return res.json(); // JSON으로 변환
+    })
+    .then((data) => {
+        if (data.success) {
+            location.href = '/'; // 로그인 성공 시 이동할 페이지
+        } else {
+            alert(data.msg); // 로그인 실패 시 메시지 표시
+        }
+    })
+    .catch((error) => {
+        console.error("Error:", error); // 에러 발생 시 출력
+    });
 }

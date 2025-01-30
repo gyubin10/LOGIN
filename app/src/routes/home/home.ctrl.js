@@ -11,8 +11,8 @@ const output = {
 
 
 const users = {
-    id: ["gyubin123", "김팀장", "나개발"],
-    psword: ["1234", "1234", "1234"],
+    id: ["abc", "hola", "나개발"],
+    psword: ["1234", "1234", "1234567"],
 };
 
 const process = {
@@ -25,15 +25,15 @@ const process = {
             const idx = users.id.indexOf(id);
             if (users.psword[idx] === psword) {
                 return res.json({
-                    succes: true,
+                    success: true,
                 });
             }
         }
 
         return res.json({
-            succes: false,
-            msg: "로그인에 실패하셨습니다"
-        })
+            success: false,
+            msg: "로그인에 실패하셨습니다",
+        });
     },
 };
 
